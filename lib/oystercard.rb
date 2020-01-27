@@ -11,4 +11,8 @@ class Oystercard
     fail 'max balance of #{max_balance} exceeded' if amount + balance > MAX_BALANCE
     @balance += amount
   end
+
+  def pay_fare(amount)
+    @balance -= amount
+  end
 end

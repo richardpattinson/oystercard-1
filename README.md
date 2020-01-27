@@ -7,7 +7,7 @@ An application for TFL Oystercards.
 _A user can:_ <br>
 - [x] hold money in their card, in the form of balance
 - [x] add money to their card
-- [ ] but not too much
+- [x] have a maximum limit (of £90) on their card
 - [ ] pay their fare through their card, by deducting the fare amount from their balance
 - [ ] touch in and out on every journey
 - [ ] pay the minimum amount for a single journey

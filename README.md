@@ -9,8 +9,8 @@ _A user can:_ <br>
 - [x] add money to their card
 - [x] have a maximum limit (of £90) on their card
 - [x] pay their fare through their card, by deducting the fare amount from their balance
-- [ ] touch in and out on every journey
-- [ ] pay the minimum amount for a single journey
+- [x] touch in and out on every journey
+- [x] pay the minimum amount for a single journey
 - [ ] pay for their journey when journey is complete (touch out)
 - [ ] see where they travelled from
 - [ ] see their previous trips

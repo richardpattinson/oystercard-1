@@ -1,5 +1,4 @@
 require './lib/oystercard.rb'
-# attr_reader :balance 
 
 def print_balance
     @balancenow = @card.balance
@@ -8,7 +7,6 @@ def print_balance
 
 @card = Oystercard.new
 p 'here is your card, enjoy'
-
 print_balance
 
 p "let's top up by £20"
@@ -19,4 +17,7 @@ p "pay your fare now, £3 please"
 @card.pay_fare(3)
 print_balance
 
-# @card.touch_in
+p "let's go on a journey! touch in!"
+@card.touch_in
+p "you touched in"
+print_balance

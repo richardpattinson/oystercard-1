@@ -1,10 +1,14 @@
 require "oystercard"
 require "spec_helper"
+require "journey"
 
 describe Oystercard do
-  let(:station) { double :station }
+  let(:entry_station) { double :entry_station }
+  let(:exit_station) { double :exit_station }
   card = Oystercard.new
   card.top_up(20)
+  card2 = Oystercard.new
+  card2.top_up(20)
 
   it "has a balance of zero" do
     expect(subject.balance).to eq(0)
@@ -12,6 +16,10 @@ describe Oystercard do
 
   it "is initially not in a journey" do
     expect(card).not_to be_in_journey
+  end
+
+  it "has an empty list of journeys by default" do
+    expect(subject.journeys).to eq([])
   end
 
   describe "#top_up" do
@@ -31,28 +39,38 @@ describe Oystercard do
   context "when travelling" do
     describe "#touch_in" do
       it "accepts an entry station argument" do
-        expect { card.touch_in(station) }.to change { card.entry_station }.to(station)
+        expect { card.touch_in(entry_station) }.to change { card.entry_station }.to(entry_station)
       end
 
       it "can touch in" do
-        card.touch_in(station)
+        card.touch_in(entry_station)
         expect(card).to be_in_journey
       end
 
       it "will not touch in if balance is lower than min fare" do
-        expect { subject.touch_in(station) }.to raise_error "insufficient balance"
+        expect { subject.touch_in(entry_station) }.to raise_error "insufficient balance"
       end
     end
 
     describe "#touch_out" do
       it "can touch out" do
-        card.touch_in(station)
-        card.touch_out
+        card.touch_in(entry_station)
+        card.touch_out(exit_station)
         expect(card).not_to be_in_journey
       end
 
       it "deducts minimum fare on touch out" do
-        expect { card.touch_out }.to change { card.balance }.by -Oystercard::MIN_FARE
+        expect { card.touch_out(exit_station) }.to change { card.balance }.by -Journey::MIN_FARE
+      end
+
+      it "accepts and stores exit station" do
+        expect { card.touch_out(exit_station) }.to change { card.exit_station }.to(exit_station)
+      end
+
+      it "stores a journey to the card" do
+        card2.touch_in(entry_station)
+        card2.touch_out(exit_station)
+        expect(card2.journeys[0]).to be_an_instance_of(Journey)
       end
     end
   end

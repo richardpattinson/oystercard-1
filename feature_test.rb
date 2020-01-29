@@ -1,4 +1,5 @@
 require './lib/oystercard.rb'
+require './lib/station.rb'
 
 def print_balance
     @balancenow = @card.balance
@@ -13,11 +14,12 @@ p "let's top up by £20"
 @card.top_up(20)
 print_balance
 
-p "pay your fare now, £3 please"
-@card.pay_fare(3)
+p "let's go on a journey! touch in!"
+@card.touch_in("here")
+p "you touched in here"
+
+@card.touch_out("there")
+p "you touched out there"
 print_balance
 
-p "let's go on a journey! touch in!"
-@card.touch_in
-p "you touched in"
-print_balance
+p @card.journeys
